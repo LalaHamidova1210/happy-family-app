@@ -11,14 +11,6 @@ private Integer iq;
 private String[][] schedule ;
 private Family family;
 
-    static {
-        System.out.println("Human class is being loaded");
-    }
-
-    {
-        System.out.println("A new Human object is created");
-    }
-
 
     public Human(String name, String surname, Integer year) {
         this.name = name;
@@ -35,7 +27,7 @@ private Family family;
         this.family=family;
     }
 
-    public Human(String lala, String hamidova, int year, String zulfiyya, String mirza) {
+    public Human(String Lala, String Hamidova, int year, String Zulfiyya, String Mirza) {
     }
 
 
@@ -131,7 +123,6 @@ public boolean feedPet(boolean feedTime){
                 ", year=" + year +
                 ", iq=" + iq +
                 ", schedule=" + Arrays.toString(schedule) +
-                ", family=" + family +
                 '}';
     }
 

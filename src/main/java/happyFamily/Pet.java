@@ -1,7 +1,6 @@
 package happyFamily;
 
 import java.util.Arrays;
-import java.util.List;
 import java.util.Objects;
 
 public class Pet {
@@ -10,15 +9,6 @@ public class Pet {
     private Integer age;
     private Integer trickLevel;
     private String[] habits;
-
-    static {
-        System.out.println("Pet class is being loaded");
-    }
-
-    {
-        System.out.println("A new pet object is created");
-    }
-
 
     public Pet(String species, String nickname) {
         this.species = species;

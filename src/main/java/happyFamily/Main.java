@@ -2,29 +2,24 @@ package happyFamily;
 
 public class Main {
     public static void main(String[] args) {
-        Pet Leo=new Pet ("dog","Leo");
         Pet Moony=new Pet ("cat","Moony", 2, 80, new String[]{"eat", "sleep"});
 
-        Human Mirza=new Human ("Mirza","Hamidov",1962 );
-        Human Zulfiyya = new Human ("Zulfiyya", "Hamidova",1972);
-        Human Gunel=new Human("Gunel", "Hamidova",1992, 80, Moony, Zulfiyya, Mirza, new String [][]{{"Monday", "Fitness"},{"Tuesday", "Reading"}});
+        Human father=new Human ("Mirza","Hamidov",1962 );
+        Human mother = new Human ("Zulfiyya", "Hamidova",1972);
+        Human child=new Human("Gunel", "Hamidova",1992, 80, Moony, father,mother, new String [][]{{"Monday", "Fitness"},{"Tuesday", "Reading"}});
 
-        Family firstFamily= new Family(Zulfiyya,Mirza);
+        Family firstFamily= new Family(mother,father);
         firstFamily.setPet(Moony);
-        firstFamily.addChild(Gunel);
+        firstFamily.addChild(child);
 
-        System.out.println(firstFamily);
-        System.out.println(Gunel);
-        System.out.println(Moony);
+        System.out.println(firstFamily.toString());
+        System.out.println("Family count: " + firstFamily.countFamily());
+
+        firstFamily.deleteChild(child);
+        System.out.println("After delete child: " + firstFamily.toString());
+        System.out.println("Family members count: " + firstFamily.countFamily());
 
 
-        Gunel.greetPet();
-        Gunel.describePet();
-        Gunel.feedPet(true);
-        Gunel.feedPet(false);
-        Moony.eat();
-        Moony.respond();
-        Moony.foul();
 
 
     }

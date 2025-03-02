@@ -1,14 +1,15 @@
 package happyFamily;
 
-import java.util.Arrays;
+import java.util.Map;
 import java.util.Objects;
+import java.util.Random;
 
 public class Human {
 private String name;
 private String surname;
 private Integer year;
 private Integer iq;
-private String[][] schedule ;
+private Map<String,String> schedule ;
 private Family family;
 
 
@@ -18,18 +19,18 @@ private Family family;
         this.year = year;
     }
 
-    public Human(String name, String surname, Integer year, Integer iq, Pet pet, Human mother, Human father, String[][] schedule) {
+    public Human(String name, String surname, Integer year, Integer iq, Map<String, String> schedule) {
         this.name = name;
         this.surname = surname;
         this.year = year;
         this.iq = iq;
         this.schedule = schedule;
-        this.family=family;
+        this.family = family;
     }
 
-    public Human(String Lala, String Hamidova, int year, String Zulfiyya, String Mirza) {
-    }
 
+    public Human() {
+    }
 
     public String getName() {
         return name;
@@ -63,12 +64,15 @@ private Family family;
         this.iq = iq;
     }
 
+    public void setFamily(Family family) {
+        this.family = family;
+    }
 
-    public String[][] getSchedule() {
+    public Map<String, String> getSchedule() {
         return schedule;
     }
 
-    public void setSchedule(String[][] schedule) {
+    public void setSchedule(Map<String,String> schedule) {
         this.schedule = schedule;
     }
 
@@ -77,42 +81,49 @@ private Family family;
     }
 
 
-    public void greetPet (){
-    System.out.println("Hello,"+family.getPet().getNickname());
-}
-public void describePet(){
-
-   String slyness;
-    if ( family.getPet().getTrickLevel()>50){
-        slyness="very sly";
-    }else {
-        slyness="not sly";
+    public void greetPet() {
+        if (family != null && family.getPets() != null && !family.getPets().isEmpty()) {
+            Pet pet = family.getPets().iterator().next();
+            System.out.println("Hello, " + pet.getNickname());
+        } else {
+            System.out.println("No pet ");
+        }
     }
-    System.out.println("I have a " + family.getPet().getSpecies() + ", it's " + family.getPet().getAge() +
-            " years old, it's " + slyness + " ");
-}
 
-public boolean feedPet(boolean feedTime){
-        if ( feedTime){
-            System.out.println("I'll feed "+ family.getPet().getNickname());
+    public void describePet() {
+        if (family != null && family.getPets() != null && !family.getPets().isEmpty()) {
+            Pet pet = family.getPets().iterator().next();
+            String slyness = (pet.getTrickLevel() > 50) ? "very sly" : "not sly";
+            System.out.println("I have a " + pet.getSpecies() + ", it's " + pet.getAge() +
+                    " years old, it's " + slyness + " ");
+        } else {
+            System.out.println("No pet ");
+        }
+    }
+
+    public boolean feedPet(boolean feedTime) {
+        if (feedTime) {
+            System.out.println("I'll feed " + family.getPets().iterator().next().getNickname());
             return true;
         } else {
-            System.out.println(family.getPet().getNickname()+ " isn't hungry");
-            return false;
+            Random random = new Random();
+            int randomNumber = random.nextInt(101);
+            Pet pet = family.getPets().iterator().next();
+            if (pet.getTrickLevel() > randomNumber) {
+                System.out.println("I'll feed " + pet.getNickname());
+                return true;
+            } else {
+                System.out.println( pet.getNickname() + " is not hungry.");
+                return false;
+            }
         }
-
-}
+    }
 
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         Human human = (Human) o;
-        return Objects.equals(name, human.name) && Objects.equals(surname, human.surname) && Objects.equals(year, human.year) && Objects.equals(iq, human.iq) && Objects.deepEquals(schedule, human.schedule) && Objects.equals(family, human.family);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(name, surname, year, iq, Arrays.deepHashCode(schedule), family);
+        return Objects.equals(name, human.name) && Objects.equals(surname, human.surname) && Objects.equals(year, human.year);
     }
 
     @Override
@@ -122,10 +133,17 @@ public boolean feedPet(boolean feedTime){
                 ", surname='" + surname + '\'' +
                 ", year=" + year +
                 ", iq=" + iq +
-                ", schedule=" + Arrays.toString(schedule) +
+                ", schedule=" + schedule +
                 '}';
     }
 
-    public void setFamily(Family family) {
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, surname, year);
+
+
     }
+
+
+
 }

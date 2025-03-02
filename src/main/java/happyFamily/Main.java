@@ -9,9 +9,14 @@ public class Main {
         Human Zulfiyya = new Human ("Zulfiyya", "Hamidova",1972);
         Human Gunel=new Human("Gunel", "Hamidova",1992, 80, Moony, Zulfiyya, Mirza, new String [][]{{"Monday", "Fitness"},{"Tuesday", "Reading"}});
 
-        System.out.println(Leo);
-        System.out.println(Moony);
+        Family firstFamily= new Family(Zulfiyya,Mirza);
+        firstFamily.setPet(Moony);
+        firstFamily.addChild(Gunel);
+
+        System.out.println(firstFamily);
         System.out.println(Gunel);
+        System.out.println(Moony);
+
 
         Gunel.greetPet();
         Gunel.describePet();

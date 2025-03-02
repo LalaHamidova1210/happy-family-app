@@ -1,16 +1,23 @@
 package happyFamily;
 
 import java.util.Arrays;
+import java.util.Objects;
 
 public class Human {
 private String name;
 private String surname;
 private Integer year;
 private Integer iq;
-private Pet pet;
-private Human mother;
-private Human father;
 private String[][] schedule ;
+private Family family;
+
+    static {
+        System.out.println("Human class is being loaded");
+    }
+
+    {
+        System.out.println("A new Human object is created");
+    }
 
 
     public Human(String name, String surname, Integer year) {
@@ -19,23 +26,13 @@ private String[][] schedule ;
         this.year = year;
     }
 
-    public Human(String name, String surname, Integer year, Human mother, Human father) {
-        this.name = name;
-        this.surname = surname;
-        this.year = year;
-        this.mother = mother;
-        this.father = father;
-    }
-
     public Human(String name, String surname, Integer year, Integer iq, Pet pet, Human mother, Human father, String[][] schedule) {
         this.name = name;
         this.surname = surname;
         this.year = year;
         this.iq = iq;
-        this.pet = pet;
-        this.mother = mother;
-        this.father = father;
         this.schedule = schedule;
+        this.family=family;
     }
 
     public Human(String lala, String hamidova, int year, String zulfiyya, String mirza) {
@@ -74,29 +71,6 @@ private String[][] schedule ;
         this.iq = iq;
     }
 
-    public Pet getPet() {
-        return pet;
-    }
-
-    public void setPet(Pet pet) {
-        this.pet = pet;
-    }
-
-    public Human getMother() {
-        return mother;
-    }
-
-    public void setMother(Human mother) {
-        this.mother = mother;
-    }
-
-    public Human getFather() {
-        return father;
-    }
-
-    public void setFather(Human father) {
-        this.father = father;
-    }
 
     public String[][] getSchedule() {
         return schedule;
@@ -106,6 +80,49 @@ private String[][] schedule ;
         this.schedule = schedule;
     }
 
+    public Family getFamily() {
+        return family;
+    }
+
+
+    public void greetPet (){
+    System.out.println("Hello,"+family.getPet().getNickname());
+}
+public void describePet(){
+
+   String slyness;
+    if ( family.getPet().getTrickLevel()>50){
+        slyness="very sly";
+    }else {
+        slyness="not sly";
+    }
+    System.out.println("I have a " + family.getPet().getSpecies() + ", it's " + family.getPet().getAge() +
+            " years old, it's " + slyness + " ");
+}
+
+public boolean feedPet(boolean feedTime){
+        if ( feedTime){
+            System.out.println("I'll feed "+ family.getPet().getNickname());
+            return true;
+        } else {
+            System.out.println(family.getPet().getNickname()+ " isn't hungry");
+            return false;
+        }
+
+}
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        Human human = (Human) o;
+        return Objects.equals(name, human.name) && Objects.equals(surname, human.surname) && Objects.equals(year, human.year) && Objects.equals(iq, human.iq) && Objects.deepEquals(schedule, human.schedule) && Objects.equals(family, human.family);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, surname, year, iq, Arrays.deepHashCode(schedule), family);
+    }
+
     @Override
     public String toString() {
         return "Human{" +
@@ -113,36 +130,11 @@ private String[][] schedule ;
                 ", surname='" + surname + '\'' +
                 ", year=" + year +
                 ", iq=" + iq +
-                ", pet=" + pet +
-                ", mother=" + mother +
-                ", father=" + father +
                 ", schedule=" + Arrays.toString(schedule) +
+                ", family=" + family +
                 '}';
     }
 
-    public void greetPet (){
-    System.out.println("Hello,"+pet.getNickname());
-}
-public void describePet(){
-
-   String slyness;
-    if ( pet.getTrickLevel()>50){
-        slyness="very sly";
-    }else {
-        slyness="not sly";
+    public void setFamily(Family family) {
     }
-    System.out.println("I have a " + pet.getSpecies() + ", it's " + pet.getAge() +
-            " years old, it's " + slyness + " ");
-}
-
-public boolean feedPet(boolean feedTime){
-        if ( feedTime){
-            System.out.println("I'll feed "+ pet.getNickname());
-            return true;
-        } else {
-            System.out.println(pet.getNickname()+ " isn't hungry");
-            return false;
-        }
-
-}
 }
